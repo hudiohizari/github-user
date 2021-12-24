@@ -2,6 +2,12 @@
 
     <string name="app_name">Github User</string>
 
+    <!-- Network Checking. -->
+    <string name="labelCantConnectToInternet">Perangkat tidak terhubung ke internet</string>
+    <string name="labelFailedToConnectToServer">Gagal terhubung ke server</string>
+    <string name="labelServerDown">Mohon maaf, server sedang bermasalah, silahkan coba beberapa saat lagi</string>
+    <string name="labelErrorString">Error: %1s</string>
+
     <string name="hello_user_search_fragment">Hello user search fragment</string>
     <string name="hello_user_detail_fragment">Hello user detail fragment</string>
 
