@@ -1,3 +1,8 @@
 <resources>
+
     <string name="app_name">Github User</string>
+
+    <string name="hello_user_search_fragment">Hello user search fragment</string>
+    <string name="hello_user_detail_fragment">Hello user detail fragment</string>
+
 </resources>
