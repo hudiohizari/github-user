@@ -18,14 +18,14 @@ class NetworkConnectionInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         if (!isInternetAvailable())
-            throw ConnectionException(context.getString(R.string.labelCantConnectToInternet))
+            throw ConnectionException(context.getString(R.string.cantConnectToInternet))
         try {
             return chain.proceed(chain.request())
         } catch (e: SocketTimeoutException) {
-            throw ConnectionException(context.getString(R.string.labelFailedToConnectToServer))
+            throw ConnectionException(context.getString(R.string.failedToConnectToServer))
         } catch (e: Exception) {
             throw ConnectionException(context.getString(
-                R.string.labelErrorString, e.message ?: ""
+                R.string.errorString, e.message ?: ""
             ))
         }
     }

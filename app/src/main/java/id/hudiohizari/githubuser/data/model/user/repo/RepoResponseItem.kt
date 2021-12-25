@@ -132,7 +132,7 @@ data class RepoResponseItem(
     val tagsUrl: String?,
     @SerializedName("teams_url")
     val teamsUrl: String?,
-    val topics: List<String>?,
+    val topics: MutableList<String>?,
     @SerializedName("trees_url")
     val treesUrl: String?,
     @SerializedName("updated_at")

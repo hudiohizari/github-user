@@ -27,7 +27,7 @@ abstract class SafeApiRequest (
             var message = ""
 
             if (code >= 500) {
-                message = context.getString(R.string.labelServerDown)
+                message = context.getString(R.string.serverDown)
             } else {
                 error?.let {
                     try {

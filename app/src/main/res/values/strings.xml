@@ -14,8 +14,11 @@
     <string name="serverDown">Mohon maaf, server sedang bermasalah, silahkan coba beberapa saat lagi</string>
     <string name="errorString">Error: %1s</string>
 
+
+    <!-- Search. -->
     <string name="reload">Muat ulang</string>
     <string name="thereIsNoMatches">Tidak ada pengguna yang cocok</string>
+    <string name="insertSearchText">Ketik input diatas untuk mencari</string>
 
     <string name="hello_user_detail_fragment">Hello user detail fragment</string>
 

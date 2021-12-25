@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:clickable="true"
+        android:focusable="true">
+
+        <include layout="@layout/layout_loading_default_list_bg" />
+
+        <include
+            android:id="@+id/content"
+            layout="@layout/layout_loading_default_list_content" />
+
+    </FrameLayout>
+
+</layout>

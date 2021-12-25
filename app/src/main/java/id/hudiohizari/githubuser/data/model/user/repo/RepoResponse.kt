@@ -1,3 +1,5 @@
 package id.hudiohizari.githubuser.data.model.user.repo
 
-class RepoResponse : ArrayList<RepoResponseItem>()
+data class RepoResponse(
+    val items: MutableList<RepoResponseItem>?
+)

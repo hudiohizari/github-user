@@ -11,6 +11,7 @@ import id.hudiohizari.githubuser.BuildConfig
 import id.hudiohizari.githubuser.data.db.AppDatabase
 import id.hudiohizari.githubuser.data.db.UserDetailDao
 import id.hudiohizari.githubuser.data.network.Client
+import id.hudiohizari.githubuser.data.network.HeaderInterceptor
 import id.hudiohizari.githubuser.data.network.NetworkConnectionInterceptor
 import id.hudiohizari.githubuser.data.network.api.GithubApi
 import retrofit2.Retrofit
@@ -33,10 +34,11 @@ class NetworkModule {
     @Provides
     @Singleton
     fun getClient(
+        headerInterceptor: HeaderInterceptor,
         networkConnectionInterceptor: NetworkConnectionInterceptor,
         chuckerInterceptor: ChuckerInterceptor
     ): Client {
-        return Client(networkConnectionInterceptor, chuckerInterceptor)
+        return Client(headerInterceptor, networkConnectionInterceptor, chuckerInterceptor)
     }
 
     @Provides

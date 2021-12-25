@@ -1,7 +1,10 @@
 package id.hudiohizari.githubuser.data.model.user.detail
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "user_detail")
 data class DetailResponse(
     @SerializedName("avatar_url")
     val avatarUrl: String?,
@@ -27,6 +30,7 @@ data class DetailResponse(
     val hireable: Boolean?,
     @SerializedName("html_url")
     val htmlUrl: String?,
+    @PrimaryKey(autoGenerate = false)
     val id: Int?,
     val location: String?,
     val login: String?,

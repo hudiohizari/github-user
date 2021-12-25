@@ -24,6 +24,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASE_URL", env['BASE_URL']
+        buildConfigField "String", "TOKEN", env['TOKEN']
     }
 
     buildTypes {
@@ -98,5 +99,5 @@ dependencies {
     implementation "androidx.room:room-ktx:2.4.0"
     implementation "androidx.room:room-runtime:2.4.0"
     kapt "androidx.room:room-compiler:2.4.0"
-    
+
 }
