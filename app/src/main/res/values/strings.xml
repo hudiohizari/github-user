@@ -1,14 +1,22 @@
 <resources>
 
     <string name="app_name">Github User</string>
+    <string name="app_db_name">DB</string>
+
+    <!-- Utils. -->
+    <string name="tagUserAgent">User-Agent</string>
+    <string name="empty">-</string>
+    <string name="emptyText">Teks Kosong</string>
 
     <!-- Network Checking. -->
-    <string name="labelCantConnectToInternet">Perangkat tidak terhubung ke internet</string>
-    <string name="labelFailedToConnectToServer">Gagal terhubung ke server</string>
-    <string name="labelServerDown">Mohon maaf, server sedang bermasalah, silahkan coba beberapa saat lagi</string>
-    <string name="labelErrorString">Error: %1s</string>
+    <string name="cantConnectToInternet">Perangkat tidak terhubung ke internet</string>
+    <string name="failedToConnectToServer">Gagal terhubung ke server</string>
+    <string name="serverDown">Mohon maaf, server sedang bermasalah, silahkan coba beberapa saat lagi</string>
+    <string name="errorString">Error: %1s</string>
 
-    <string name="hello_user_search_fragment">Hello user search fragment</string>
+    <string name="reload">Muat ulang</string>
+    <string name="thereIsNoMatches">Tidak ada pengguna yang cocok</string>
+
     <string name="hello_user_detail_fragment">Hello user detail fragment</string>
 
 </resources>
