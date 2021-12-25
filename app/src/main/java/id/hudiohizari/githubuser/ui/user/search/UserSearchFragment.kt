@@ -15,7 +15,7 @@ import id.hudiohizari.githubuser.data.adapter.base.UnspecifiedTypeItem
 import id.hudiohizari.githubuser.data.adapter.base.performUpdates
 import id.hudiohizari.githubuser.data.adapter.user.UserListItem
 import id.hudiohizari.githubuser.data.adapter.user.UserLoadMoreListItem
-import id.hudiohizari.githubuser.data.adapter.base.DefaultLoadingListItem
+import id.hudiohizari.githubuser.data.adapter.user.UserLoadingListItem
 import id.hudiohizari.githubuser.data.model.user.search.Item
 import id.hudiohizari.githubuser.databinding.FragmentUserSearchBinding
 import id.hudiohizari.githubuser.util.extention.observeDebounce
@@ -32,26 +32,31 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
     private lateinit var binding: FragmentUserSearchBinding
     private val viewModel: UserSearchViewModel by viewModels()
 
+    private var v: View? = null
     private val userList: MutableList<Item> = mutableListOf()
     private var page = 1
+    private var lastSearch = ""
 
     private lateinit var itemDecoration: DividerItemDecoration
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.fragment_user_search,
-            container,
-            false
-        )
-        viewModel.setListener(this)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+    ): View? {
+        if (view == null) {
+            binding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_user_search,
+                container,
+                false
+            )
+            viewModel.setListener(this)
+            binding.viewModel = viewModel
+            binding.lifecycleOwner = this
+            v = binding.root
+        }
 
-        return binding.root
+        return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,7 +81,10 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
                     getUserAdapter().performUpdates(items)
                 }
 
-                if (!it.isNullOrEmpty()) loadUser(page)
+                if (!it.isNullOrEmpty() && it != lastSearch) {
+                    loadUser(page)
+                    lastSearch = it
+                }
             })
             response.observe(viewLifecycleOwner, {
                 processUserListData(it)
@@ -148,9 +156,9 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
     override fun showUserLoading(isLoading: Boolean) {
         if (isLoading) {
             val items: MutableList<UnspecifiedTypeItem> = mutableListOf()
-            items.add(DefaultLoadingListItem())
-            items.add(DefaultLoadingListItem())
-            items.add(DefaultLoadingListItem())
+            items.add(UserLoadingListItem())
+            items.add(UserLoadingListItem())
+            items.add(UserLoadingListItem())
             getUserAdapter().performUpdates(items)
         }
     }

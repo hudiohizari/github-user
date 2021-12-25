@@ -15,10 +15,6 @@ import id.hudiohizari.githubuser.util.extention.loadingAnimation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import androidx.recyclerview.widget.RecyclerView
-
-
-
 
 class UserListItem(
     val model: Item,
@@ -44,7 +40,7 @@ class UserListItem(
                 binding.isFailed = false
                 binding.isLoading = true
                 Handler(Looper.getMainLooper()).postDelayed({
-                    binding.loading.loadingAnimation()
+                    binding.loading.loading.loadingAnimation()
                 }, 1)
                 try {
                     val user = listener.requestUser(model.login)

@@ -146,7 +146,7 @@
         <include
             android:id="@+id/loading"
             android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
-            layout="@layout/layout_loading_default_list_content" />
+            layout="@layout/list_item_loading_user" />
 
         <include
             android:visibility="@{isFailed ? View.VISIBLE : View.GONE, default=gone}"

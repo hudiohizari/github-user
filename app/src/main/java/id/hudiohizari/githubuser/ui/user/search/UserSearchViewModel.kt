@@ -17,12 +17,12 @@ import javax.inject.Inject
 class UserSearchViewModel @Inject constructor(
     private val repository: GithubRepository
 ): ViewModel() {
-    val search = MutableLiveData<String>("")
+    val search = MutableLiveData("")
     val response = MutableLiveData<SearchResponse>()
 
     fun loadUser(page: Int) {
-        if (page == 1) listener?.showUserLoading(true)
         viewModelScope.launch {
+            if (page == 1) listener?.showUserLoading(true)
             try {
                 val response = repository.getUsers(search.value, page)
                 response?.let { this@UserSearchViewModel.response.postValue(it) }
@@ -31,7 +31,7 @@ class UserSearchViewModel @Inject constructor(
             } catch (e: ConnectionException) {
                 listener?.showSnackbarLong(e.message)
             } finally {
-                listener?.showUserLoading(false)
+                if (page == 1) listener?.showUserLoading(false)
             }
         }
     }
