@@ -67,14 +67,16 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
     private fun initObserver() {
         viewModel.apply {
             search.observeDebounce(viewLifecycleOwner, {
-                binding.rvUser.removeItemDecoration(itemDecoration)
-
                 userList.clear()
-                val items: MutableList<UnspecifiedTypeItem> = mutableListOf()
-                items.add(DefaultEmptyListItem(getString(R.string.insertSearchText)))
-                getUserAdapter().performUpdates(items)
 
-                if (it != null && it.isNotEmpty()) loadUser(page)
+                if (it.isEmpty()) {
+                    binding.rvUser.removeItemDecoration(itemDecoration)
+                    val items: MutableList<UnspecifiedTypeItem> = mutableListOf()
+                    items.add(DefaultEmptyListItem(getString(R.string.insertSearchText)))
+                    getUserAdapter().performUpdates(items)
+                }
+
+                if (!it.isNullOrEmpty()) loadUser(page)
             })
             response.observe(viewLifecycleOwner, {
                 processUserListData(it)
@@ -118,6 +120,7 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
             }
 
             if (userList.isEmpty()) {
+                binding.rvUser.removeItemDecoration(itemDecoration)
                 items.add(DefaultEmptyListItem(getString(R.string.thereIsNoMatches)))
             } else {
                 binding.rvUser.addItemDecoration(itemDecoration)
