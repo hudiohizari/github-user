@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/searchUserFragment"
         android:name="id.hudiohizari.githubuser.ui.user.search.UserSearchFragment"
-        android:label="fragment_search_user"
+        android:label="@string/search"
         tools:layout="@layout/fragment_user_search" >
         <action
             android:id="@+id/action_searchUserFragment_to_userDetailFragment"
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="id.hudiohizari.githubuser.ui.user.detail.UserDetailFragment"
-        android:label="fragment_user_detail"
+        android:label="@string/detail"
         tools:layout="@layout/fragment_user_detail">
         <argument
             android:name="detailResponse"

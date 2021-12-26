@@ -3,7 +3,6 @@ package id.hudiohizari.githubuser.ui.user.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.hudiohizari.githubuser.data.model.user.detail.DetailResponse
 import id.hudiohizari.githubuser.data.model.user.repo.RepoResponse

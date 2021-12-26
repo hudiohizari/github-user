@@ -15,12 +15,14 @@
     <string name="errorString">Error: %1s</string>
 
     <!-- Search. -->
+    <string name="search">Search</string>
     <string name="reload">Reload</string>
     <string name="thereIsNoMatches">There is no matches</string>
     <string name="insertSearchText">Input text on the field above</string>
     <string name="usernameFormat">\@%1s</string>
 
     <!-- Detail. -->
+    <string name="detail">Detail</string>
     <string name="followers">\u0020Followers ·\u0020</string>
     <string name="following">\u0020Following</string>
     <string name="repoEmpty">User repo is empty</string>

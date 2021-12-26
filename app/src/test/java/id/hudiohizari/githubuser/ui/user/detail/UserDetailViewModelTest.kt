@@ -2,7 +2,6 @@ package id.hudiohizari.githubuser.ui.user.detail
 
 import androidx.lifecycle.MutableLiveData
 import id.hudiohizari.githubuser.data.model.user.detail.DetailResponse
-import id.hudiohizari.githubuser.data.model.user.repo.RepoResponse
 import id.hudiohizari.githubuser.data.network.ApiException
 import id.hudiohizari.githubuser.data.network.ConnectionException
 import id.hudiohizari.githubuser.data.repository.GithubRepository

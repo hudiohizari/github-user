@@ -2,9 +2,9 @@
 <resources>
 
     <!-- Default color. -->
-    <color name="primary">#2457E9</color>
-    <color name="primaryDark">#0061ED</color>
-    <color name="accent">#8ABDFF</color>
+    <color name="primary">#263238</color>
+    <color name="primaryDark">#000A12</color>
+    <color name="accent">#4F5B62</color>
 
     <!-- View color. -->
     <color name="background">@android:color/white</color>

@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import id.hudiohizari.githubuser.data.adapter.base.DefaultEmptyListItem
 import id.hudiohizari.githubuser.data.model.user.detail.DetailResponse
 import id.hudiohizari.githubuser.data.model.user.search.SearchResponse
+import androidx.appcompat.app.AppCompatActivity
 
 @AndroidEntryPoint
 class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
@@ -38,6 +39,16 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
     private var lastSearch = ""
 
     private lateinit var itemDecoration: DividerItemDecoration
+
+    override fun onResume() {
+        super.onResume()
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
