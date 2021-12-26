@@ -28,13 +28,13 @@ object DateUtil {
                         .toDays(now.time - past.time).toInt()
                     when {
                         seconds < 60 -> context.resources.getQuantityString(
-                            R.plurals.updatedSecondAgo, seconds
+                            R.plurals.updatedSecondAgo, seconds, seconds
                         )
                         minutes < 60 -> context.resources.getQuantityString(
-                            R.plurals.updatedMinuteAgo, minutes
+                            R.plurals.updatedMinuteAgo, minutes, minutes
                         )
                         hours < 24 -> context.resources.getQuantityString(
-                            R.plurals.updatedHourAgo, hours
+                            R.plurals.updatedHourAgo, hours, hours
                         )
                         days < 7 -> context.resources.getQuantityString(
                             R.plurals.updatedDayAgo, days , days

@@ -67,8 +67,10 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
     private fun initObserver() {
         viewModel.apply {
             search.observeDebounce(viewLifecycleOwner, {
-                page = 1
-                userList.clear()
+                if (it != lastSearch) {
+                    page = 1
+                    userList.clear()
+                }
 
                 if (it.isEmpty()) {
                     binding.rvUser.removeItemDecoration(getItemDecoration())
