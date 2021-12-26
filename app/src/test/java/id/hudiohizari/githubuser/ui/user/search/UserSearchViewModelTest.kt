@@ -4,6 +4,7 @@ import id.hudiohizari.githubuser.data.network.ApiException
 import id.hudiohizari.githubuser.data.network.ConnectionException
 import id.hudiohizari.githubuser.data.repository.GithubRepository
 import id.hudiohizari.githubuser.util.MainCoroutineRule
+import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -17,7 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class UserSearchViewModelTest {
+class UserSearchViewModelTest : TestCase() {
 
     @get:Rule
     val coroutineRule = MainCoroutineRule()
@@ -26,12 +27,15 @@ class UserSearchViewModelTest {
     private lateinit var repository: GithubRepository
     @Mock
     private lateinit var listener: UserSearchViewModel.Listener
+    @Mock
+    private lateinit var throwableApiException: ApiException
+    @Mock
+    private lateinit var throwableConnectionException: ConnectionException
 
     private lateinit var viewModel: UserSearchViewModel
 
-    @ExperimentalCoroutinesApi
     @Before
-    fun setUp() {
+    public override fun setUp() {
         viewModel = UserSearchViewModel(repository)
         viewModel.setListener(listener)
     }
@@ -42,6 +46,8 @@ class UserSearchViewModelTest {
 
         viewModel.loadUser(1)
         inOrder.verify(listener).showUserLoading(true)
+        inOrder.verify(listener, never()).showSnackbar(throwableApiException.message)
+        inOrder.verify(listener, never()).showSnackbarLong(throwableConnectionException.message)
         inOrder.verify(listener).showUserLoading(false)
     }
 
@@ -49,17 +55,15 @@ class UserSearchViewModelTest {
     fun checkLoadPage_PageOne_ThrowApiException() = runBlocking {
         val search = ""
         val page = 1
-        val message = "Search cant be empty"
-
         val inOrder = Mockito.inOrder(listener)
-        val throwable = ApiException(400, message)
 
         Mockito.`when`(repository.getUsers(search, page))
-            .thenAnswer { throw throwable }
+            .thenAnswer { throw throwableApiException }
 
         viewModel.loadUser(page)
         inOrder.verify(listener).showUserLoading(true)
-        inOrder.verify(listener).showSnackbar(throwable.message)
+        inOrder.verify(listener).showSnackbar(throwableApiException.message)
+        inOrder.verify(listener, never()).showSnackbarLong(throwableConnectionException.message)
         inOrder.verify(listener).showUserLoading(false)
     }
 
@@ -67,17 +71,15 @@ class UserSearchViewModelTest {
     fun checkLoadPage_PageOne_ThrowConnectionException() = runBlocking {
         val search = ""
         val page = 1
-        val message = "Device not connected to the internet"
-
         val inOrder = Mockito.inOrder(listener)
-        val throwable = ConnectionException(message)
 
         Mockito.`when`(repository.getUsers(search, page))
-            .thenAnswer { throw throwable }
+            .thenAnswer { throw throwableConnectionException }
 
         viewModel.loadUser(page)
         inOrder.verify(listener).showUserLoading(true)
-        inOrder.verify(listener).showSnackbarLong(throwable.message)
+        inOrder.verify(listener, never()).showSnackbar(throwableApiException.message)
+        inOrder.verify(listener).showSnackbarLong(throwableConnectionException.message)
         inOrder.verify(listener).showUserLoading(false)
     }
 
@@ -87,6 +89,8 @@ class UserSearchViewModelTest {
 
         viewModel.loadUser(2)
         inOrder.verify(listener, never()).showUserLoading(true)
+        inOrder.verify(listener, never()).showSnackbar(throwableApiException.message)
+        inOrder.verify(listener, never()).showSnackbarLong(throwableConnectionException.message)
         inOrder.verify(listener, never()).showUserLoading(false)
     }
 
@@ -94,17 +98,15 @@ class UserSearchViewModelTest {
     fun checkLoadPage_PageTwoAndAbove_ThrowApiException() = runBlocking {
         val search = ""
         val page = 2
-        val message = "Search cant be empty"
-
         val inOrder = Mockito.inOrder(listener)
-        val throwable = ApiException(400, message)
 
         Mockito.`when`(repository.getUsers(search, page))
-            .thenAnswer { throw throwable }
+            .thenAnswer { throw throwableApiException }
 
         viewModel.loadUser(page)
         inOrder.verify(listener, never()).showUserLoading(true)
-        inOrder.verify(listener).showSnackbar(throwable.message)
+        inOrder.verify(listener).showSnackbar(throwableApiException.message)
+        inOrder.verify(listener, never()).showSnackbarLong(throwableConnectionException.message)
         inOrder.verify(listener, never()).showUserLoading(false)
     }
 
@@ -112,17 +114,15 @@ class UserSearchViewModelTest {
     fun checkLoadPage_PageTwoAndAbove_ThrowConnectionException() = runBlocking {
         val search = ""
         val page = 2
-        val message = "Device not connected to the internet"
-
         val inOrder = Mockito.inOrder(listener)
-        val throwable = ConnectionException(message)
 
         Mockito.`when`(repository.getUsers(search, page))
-            .thenAnswer { throw throwable }
+            .thenAnswer { throw throwableConnectionException }
 
         viewModel.loadUser(page)
         inOrder.verify(listener, never()).showUserLoading(true)
-        inOrder.verify(listener).showSnackbarLong(throwable.message)
+        inOrder.verify(listener, never()).showSnackbar(throwableApiException.message)
+        inOrder.verify(listener).showSnackbarLong(throwableConnectionException.message)
         inOrder.verify(listener, never()).showUserLoading(false)
     }
 

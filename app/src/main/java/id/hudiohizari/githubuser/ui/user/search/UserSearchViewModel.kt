@@ -17,6 +17,7 @@ import javax.inject.Inject
 class UserSearchViewModel @Inject constructor(
     private val repository: GithubRepository
 ): ViewModel() {
+
     val search = MutableLiveData("")
     val response = MutableLiveData<SearchResponse>()
 
