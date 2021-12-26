@@ -1,14 +1,9 @@
 package id.hudiohizari.githubuser.ui.user.detail
 
-import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
-import android.widget.TextView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.hudiohizari.githubuser.data.model.user.detail.DetailResponse
 import id.hudiohizari.githubuser.data.model.user.repo.RepoResponse
@@ -27,16 +22,21 @@ class UserDetailViewModel @Inject constructor(
     val response = MutableLiveData<RepoResponse>()
 
     fun loadUserRepo() {
+        println("loadUserRepo")
         viewModelScope.launch {
             listener?.showRepoLoading(true)
             try {
                 val response = repository.getUserRepo(userDetail.value?.login)
                 response?.let { this@UserDetailViewModel.response.postValue(it) }
+                println("response: ${Gson().toJson(response)}")
             } catch (e: ApiException) {
+                println("ApiException = ${e.message}")
                 listener?.showSnackbar(e.message)
             } catch (e: ConnectionException) {
+                println("ConnectionException = ${e.message}")
                 listener?.showSnackbarLong(e.message)
             } finally {
+                println("finally")
                 listener?.showRepoLoading(false)
             }
         }
