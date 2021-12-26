@@ -13,7 +13,7 @@ import id.hudiohizari.githubuser.R
 @AndroidEntryPoint
 class UserDetailFragment : Fragment() {
 
-    val args: UserDetailFragmentArgs by navArgs()
+    private val args: UserDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +25,9 @@ class UserDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val username = args.username
-        Log.e("UserDetailFragmentArgs", "username: $username")
-
-        val id = args.id
-        Log.e("UserDetailFragmentArgs", "id: $id")
+        val detailResponse = args.detailResponse
+        Log.e("UserDetailFragmentArgs", "username: ${detailResponse?.login}")
+        Log.e("UserDetailFragmentArgs", "id: ${detailResponse?.id}")
     }
 
 }

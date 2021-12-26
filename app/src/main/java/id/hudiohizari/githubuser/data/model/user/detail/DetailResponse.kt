@@ -1,9 +1,12 @@
 package id.hudiohizari.githubuser.data.model.user.detail
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "user_detail")
 data class DetailResponse(
     @SerializedName("avatar_url")
@@ -59,4 +62,4 @@ data class DetailResponse(
     @SerializedName("updated_at")
     val updatedAt: String?,
     val url: String?
-)
+): Parcelable

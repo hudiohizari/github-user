@@ -21,11 +21,8 @@
         android:label="fragment_user_detail"
         tools:layout="@layout/fragment_user_detail">
         <argument
-            android:name="id"
-            app:argType="integer" />
-        <argument
-            android:name="username"
-            app:argType="string"
+            android:name="detailResponse"
+            app:argType="id.hudiohizari.githubuser.data.model.user.detail.DetailResponse"
             app:nullable="true" />
     </fragment>
 

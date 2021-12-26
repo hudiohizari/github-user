@@ -98,9 +98,9 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
             userList.addAll(users)
             userList.forEach { user ->
                 items.add(UserListItem(user, object : UserListItem.EventListener {
-                    override fun onClick(item: Item) {
+                    override fun onClick(item: DetailResponse?) {
                         val action = UserSearchFragmentDirections
-                            .actionSearchUserFragmentToUserDetailFragment(item.id ?: -1, item.login)
+                            .actionSearchUserFragmentToUserDetailFragment(item)
                         binding.root.findNavController().navigate(action)
                     }
 

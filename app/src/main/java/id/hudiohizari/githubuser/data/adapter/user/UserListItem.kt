@@ -34,6 +34,7 @@ class UserListItem(
     override val type: Int get() = hashCode()
 
     override fun bindView(binding: ItemUserBinding, payloads: List<Any>) {
+        binding.onClick = null
         CoroutineScope(Dispatchers.IO).launch {
             uiModel = listener.requestLocalUser(model.id)
             if (uiModel == null) {
@@ -56,12 +57,12 @@ class UserListItem(
                 }
             }
             binding.model = uiModel
-            binding.onClick = View.OnClickListener { listener.onClick(model) }
+            binding.onClick = View.OnClickListener { listener.onClick(uiModel) }
         }
     }
 
     interface EventListener {
-        fun onClick(item: Item)
+        fun onClick(item: DetailResponse?)
         suspend fun requestLocalUser(id: Int?): DetailResponse?
         suspend fun requestUser(username: String?): DetailResponse?
         suspend fun insertLocalUser(user: DetailResponse?)
