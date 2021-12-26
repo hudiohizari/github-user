@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="onClickedReload"
+            name="onClickReload"
             type="android.view.View.OnClickListener" />
     </data>
 
@@ -15,7 +15,7 @@
         android:animateLayoutChanges="true">
 
         <androidx.cardview.widget.CardView
-            android:onClick="@{onClickedReload}"
+            android:onClick="@{onClickReload}"
             android:id="@+id/cvReload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

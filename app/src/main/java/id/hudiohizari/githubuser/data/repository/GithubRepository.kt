@@ -17,6 +17,7 @@ class GithubRepository @Inject constructor(
 
     companion object {
         const val DEFAULT_LIMIT = 20
+        const val DEFAULT_SORT = "updated"
     }
 
     suspend fun getUsers(
@@ -29,8 +30,8 @@ class GithubRepository @Inject constructor(
         githubApi.getUser(username)
     }
 
-    suspend fun getUserRepo(username: String) = apiRequest {
-        githubApi.getUserRepo(username)
+    suspend fun getUserRepo(username: String?) = apiRequest {
+        githubApi.getUserRepo(username, DEFAULT_SORT)
     }
 
     suspend fun getLocalUser(id: Int?): DetailResponse? {

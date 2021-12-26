@@ -1,13 +1,12 @@
-package id.hudiohizari.githubuser.data.adapter.user
+package id.hudiohizari.githubuser.data.adapter.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.mikepenz.fastadapter.binding.AbstractBindingItem
-import id.hudiohizari.githubuser.data.adapter.base.DiffableListItemType
 import id.hudiohizari.githubuser.databinding.ListItemLoadMoreBinding
 
-class UserLoadMoreListItem(
-    val listener: EventListener
+class DefaultLoadMoreListItem(
+    val listener: Listener
 ) : AbstractBindingItem<ListItemLoadMoreBinding>(),
     DiffableListItemType {
 
@@ -34,7 +33,7 @@ class UserLoadMoreListItem(
         listener.onLoadMore(false)
     }
 
-    interface EventListener {
+    interface Listener {
         fun onLoadMore(isLoadMore: Boolean)
     }
 }

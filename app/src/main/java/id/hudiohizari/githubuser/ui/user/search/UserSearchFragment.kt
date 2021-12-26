@@ -14,7 +14,7 @@ import id.hudiohizari.githubuser.R
 import id.hudiohizari.githubuser.data.adapter.base.UnspecifiedTypeItem
 import id.hudiohizari.githubuser.data.adapter.base.performUpdates
 import id.hudiohizari.githubuser.data.adapter.user.UserListItem
-import id.hudiohizari.githubuser.data.adapter.user.UserLoadMoreListItem
+import id.hudiohizari.githubuser.data.adapter.base.DefaultLoadMoreListItem
 import id.hudiohizari.githubuser.data.adapter.user.UserLoadingListItem
 import id.hudiohizari.githubuser.data.model.user.search.Item
 import id.hudiohizari.githubuser.databinding.FragmentUserSearchBinding
@@ -52,7 +52,6 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
             )
             viewModel.setListener(this)
             binding.viewModel = viewModel
-            binding.lifecycleOwner = this
             v = binding.root
         }
 
@@ -61,10 +60,6 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        itemDecoration = DividerItemDecoration(
-            context,
-            DividerItemDecoration.VERTICAL
-        )
 
         initObserver()
     }
@@ -72,10 +67,11 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
     private fun initObserver() {
         viewModel.apply {
             search.observeDebounce(viewLifecycleOwner, {
+                page = 1
                 userList.clear()
 
                 if (it.isEmpty()) {
-                    binding.rvUser.removeItemDecoration(itemDecoration)
+                    binding.rvUser.removeItemDecoration(getItemDecoration())
                     val items: MutableList<UnspecifiedTypeItem> = mutableListOf()
                     items.add(DefaultEmptyListItem(getString(R.string.insertSearchText)))
                     getUserAdapter().performUpdates(items)
@@ -87,17 +83,17 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
                 }
             })
             response.observe(viewLifecycleOwner, {
-                processUserListData(it)
+                it?.let { processUserListData(it) }
             })
         }
     }
 
-    private fun processUserListData(searchResponse: SearchResponse?) {
-        searchResponse?.items?.let { users ->
+    private fun processUserListData(searchResponse: SearchResponse) {
+        searchResponse.items?.let { users ->
             val items: MutableList<UnspecifiedTypeItem> = mutableListOf()
             userList.addAll(users)
             userList.forEach { user ->
-                items.add(UserListItem(user, object : UserListItem.EventListener {
+                items.add(UserListItem(user, object : UserListItem.Listener {
                     override fun onClick(item: DetailResponse?) {
                         val action = UserSearchFragmentDirections
                             .actionSearchUserFragmentToUserDetailFragment(item)
@@ -120,7 +116,7 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
 
             if (users.size > 0) {
                 page++
-                items.add(UserLoadMoreListItem(object : UserLoadMoreListItem.EventListener {
+                items.add(DefaultLoadMoreListItem(object : DefaultLoadMoreListItem.Listener {
                     override fun onLoadMore(isLoadMore: Boolean) {
                         if (isLoadMore) { viewModel.loadUser(page) }
                     }
@@ -128,18 +124,29 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
             }
 
             if (userList.isEmpty()) {
-                binding.rvUser.removeItemDecoration(itemDecoration)
+                binding.rvUser.removeItemDecoration(getItemDecoration())
                 items.add(DefaultEmptyListItem(getString(R.string.thereIsNoMatches)))
             } else {
-                binding.rvUser.addItemDecoration(itemDecoration)
+                binding.rvUser.addItemDecoration(getItemDecoration())
             }
 
             getUserAdapter().performUpdates(items)
         }
     }
 
+    private fun getItemDecoration(): DividerItemDecoration {
+        if (!::itemDecoration.isInitialized) {
+            itemDecoration = DividerItemDecoration(
+                context,
+                DividerItemDecoration.VERTICAL
+            )
+        }
+        return itemDecoration
+    }
+
     private fun getUserAdapter(): FastItemAdapter<UnspecifiedTypeItem> {
         if (binding.adapter == null) {
+
             binding.adapter = FastItemAdapter()
         }
         return binding.adapter as FastItemAdapter

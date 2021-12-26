@@ -20,7 +20,10 @@ interface GithubApi {
     @GET("users/{username}")
     suspend fun getUser(@Path("username") username: String?): Response<DetailResponse>
 
-    @GET("users/{username}/repo")
-    suspend fun getUserRepo(@Path("username") username: String?): Response<RepoResponse>
+    @GET("users/{username}/repos")
+    suspend fun getUserRepo(
+        @Path("username") username: String?,
+        @Query("sort") sort: String?
+    ): Response<RepoResponse>
 
 }

@@ -6,20 +6,44 @@
     <!-- Utils. -->
     <string name="tagUserAgent">User-Agent</string>
     <string name="empty">-</string>
-    <string name="emptyText">Teks Kosong</string>
+    <string name="emptyText">Empty Text</string>
 
     <!-- Network Checking. -->
-    <string name="cantConnectToInternet">Perangkat tidak terhubung ke internet</string>
-    <string name="failedToConnectToServer">Gagal terhubung ke server</string>
-    <string name="serverDown">Mohon maaf, server sedang bermasalah, silahkan coba beberapa saat lagi</string>
+    <string name="cantConnectToInternet">Device not connected to the internet</string>
+    <string name="failedToConnectToServer">Failed to connect to the server</string>
+    <string name="serverDown">Sorry, server is unreachable, please try again later</string>
     <string name="errorString">Error: %1s</string>
 
-
     <!-- Search. -->
-    <string name="reload">Muat ulang</string>
-    <string name="thereIsNoMatches">Tidak ada pengguna yang cocok</string>
-    <string name="insertSearchText">Ketik input diatas untuk mencari</string>
+    <string name="reload">Reload</string>
+    <string name="thereIsNoMatches">There is no matches</string>
+    <string name="insertSearchText">Input text on the field above</string>
+    <string name="usernameFormat">\@%1s</string>
 
-    <string name="hello_user_detail_fragment">Hello user detail fragment</string>
+    <!-- Detail. -->
+    <string name="followers">\u0020Followers ·\u0020</string>
+    <string name="following">\u0020Following</string>
+    <string name="repoEmpty">User repo is empty</string>
+    <plurals name="updatedSecondAgo">
+        <item quantity="one">updated %1d second ago</item>
+        <item quantity="other">updated %1d seconds ago</item>
+    </plurals>
+    <plurals name="updatedMinuteAgo">
+        <item quantity="one">updated %1d minute ago</item>
+        <item quantity="other">updated %1d minutes ago</item>
+    </plurals>
+    <plurals name="updatedHourAgo">
+        <item quantity="one">updated %1d hour ago</item>
+        <item quantity="other">updated %1d hours ago</item>
+    </plurals>
+    <plurals name="updatedDayAgo">
+        <item quantity="one">updated %1d day ago</item>
+        <item quantity="other">updated %1d days ago</item>
+    </plurals>
+    <plurals name="updatedWeekAgo">
+        <item quantity="one">updated %1d week ago</item>
+        <item quantity="other">updated %1d weeks ago</item>
+    </plurals>
+    <string name="wrongFormat">Wrong Format</string>
 
 </resources>

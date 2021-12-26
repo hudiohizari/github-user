@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View" />
+        <import type="id.hudiohizari.githubuser.util.DateUtil" />
         <variable
             name="isLoading"
             type="Boolean" />
@@ -13,20 +13,12 @@
             type="Boolean" />
         <variable
             name="model"
-            type="id.hudiohizari.githubuser.data.model.user.detail.DetailResponse" />
-        <variable
-            name="onClick"
-            type="android.view.View.OnClickListener" />
-        <variable
-            name="onClickReload"
-            type="android.view.View.OnClickListener" />
+            type="id.hudiohizari.githubuser.data.model.user.repo.RepoResponseItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:onClick="@{onClick}"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvImage"
@@ -45,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{model.avatarUrl}"
+                app:imageUrl="@{model.owner.avatarUrl}"
                 app:doNotLoadNull="@{true}"
                 tools:src="@tools:sample/backgrounds/scenic"
                 tools:ignore="ContentDescription" />
@@ -56,104 +48,76 @@
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@{model.name ?? @string/empty}"
             android:textColor="@color/neutral_900"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cvImage"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="My Name Is" />
+            tools:text="Repo name" />
 
         <TextView
-            android:id="@+id/tvUsername"
+            android:id="@+id/tvDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="8dp"
-            android:text="@{model.getFormattedUsername(context)}"
-            android:textColor="@color/neutral_900"
-            android:textStyle="bold"
-            android:textSize="10sp"
-            android:maxLines="1"
-            android:ellipsize="end"
-            app:layout_constraintBottom_toBottomOf="@id/tvName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvName"
-            app:layout_constraintTop_toTopOf="@id/tvName"
-            tools:text="My Name Is"
-            tools:ignore="SmallSp" />
-
-        <TextView
-            android:id="@+id/tvCompany"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginStart="8dp"
-            android:text="@{model.company ?? @string/empty}"
-            android:textColor="@color/neutral_900"
-            android:maxLines="1"
+            android:layout_marginTop="8dp"
+            android:text="@{model.description ?? @string/empty}"
+            android:textColor="@color/neutral_700"
+            android:maxLines="4"
             android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cvImage"
             app:layout_constraintTop_toBottomOf="@id/tvName"
-            tools:text="Head of Engineering of A Company" />
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
-            android:id="@+id/tvLocation"
+            android:id="@+id/tvStar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:text="@{model.location ?? @string/empty}"
+            android:gravity="center_vertical"
+            android:text="@{model.formattedStargazersCount ?? @string/empty}"
             android:textSize="10sp"
             android:textColor="@color/neutral_700"
             android:maxLines="1"
             android:ellipsize="end"
+            android:drawablePadding="4dp"
+            app:drawableStartCompat="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/cvImage"
-            app:layout_constraintTop_toBottomOf="@id/tvCompany"
-            tools:text="Somewhere, Some Country"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            tools:text="55"
             tools:ignore="SmallSp" />
 
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/tvLastUpdated"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:text="@{model.email ?? @string/empty}"
+            android:text="@{DateUtil.INSTANCE.getTimeAgo(context, model.updatedAt) ?? @string/empty}"
             android:textSize="10sp"
             android:textColor="@color/neutral_700"
             android:maxLines="1"
             android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tvLocation"
-            app:layout_constraintTop_toBottomOf="@id/tvCompany"
-            tools:text="me@email.com"
+            app:layout_constraintStart_toEndOf="@id/tvStar"
+            app:layout_constraintTop_toBottomOf="@id/tvDescription"
+            tools:text="Updated 15 hours ago"
             tools:ignore="SmallSp" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/gItem"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="@{isLoading ? View.GONE : View.VISIBLE, default=gone}"
-            app:constraint_referenced_ids="cvImage,tvName,tvUsername,tvCompany,tvLocation,tvEmail" />
-
-        <include layout="@layout/list_item_loading_user"
-            android:id="@+id/loading"
-            android:visibility="@{isLoading ? View.VISIBLE : View.GONE}" />
-
-        <include layout="@layout/list_item_reload_default"
-            android:id="@+id/iReload"
-            android:visibility="@{isFailed ? View.VISIBLE : View.GONE, default=gone}"
-            app:onClickReload="@{onClickReload}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

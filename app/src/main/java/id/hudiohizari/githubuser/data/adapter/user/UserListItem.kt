@@ -17,8 +17,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserListItem(
-    val model: Item,
-    private val listener: EventListener
+    private val model: Item,
+    private val listener: Listener
 ) : AbstractBindingItem<ItemUserBinding>(), DiffableListItemType {
 
     private var uiModel: DetailResponse? = null
@@ -35,6 +35,11 @@ class UserListItem(
 
     override fun bindView(binding: ItemUserBinding, payloads: List<Any>) {
         binding.onClick = null
+        binding.onClickReload = View.OnClickListener { loadData(binding) }
+        loadData(binding)
+    }
+
+    private fun loadData(binding: ItemUserBinding) {
         CoroutineScope(Dispatchers.IO).launch {
             uiModel = listener.requestLocalUser(model.id)
             if (uiModel == null) {
@@ -61,7 +66,7 @@ class UserListItem(
         }
     }
 
-    interface EventListener {
+    interface Listener {
         fun onClick(item: DetailResponse?)
         suspend fun requestLocalUser(id: Int?): DetailResponse?
         suspend fun requestUser(username: String?): DetailResponse?

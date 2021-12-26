@@ -1,5 +1,6 @@
 package id.hudiohizari.githubuser.data.model.user.repo
 
+
 import com.google.gson.annotations.SerializedName
 
 data class Owner(
@@ -17,7 +18,9 @@ data class Owner(
     val gravatarId: String?,
     @SerializedName("html_url")
     val htmlUrl: String?,
+    @SerializedName("id")
     val id: Int?,
+    @SerializedName("login")
     val login: String?,
     @SerializedName("node_id")
     val nodeId: String?,
@@ -33,6 +36,8 @@ data class Owner(
     val starredUrl: String?,
     @SerializedName("subscriptions_url")
     val subscriptionsUrl: String?,
+    @SerializedName("type")
     val type: String?,
+    @SerializedName("url")
     val url: String?
 )

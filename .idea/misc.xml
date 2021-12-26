@@ -11,8 +11,9 @@
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/font/roboto.xml" value="0.2328125" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/activity_dashboard.xml" value="0.3625" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/activity_main.xml" value="0.18854166666666666" />
-        <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/fragment_user_detail.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/fragment_user_detail.xml" value="0.33" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/fragment_user_search.xml" value="0.33" />
+        <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/item_repo.xml" value="0.37447916666666664" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/item_user.xml" value="0.3435185185185185" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/layout_loading_default_list_bg.xml" value="0.3435185185185185" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/layout_loading_default_list_content.xml" value="0.3435185185185185" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/list_item_empty_default.xml" value="0.21458333333333332" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/list_item_load_more.xml" value="0.3435185185185185" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/list_item_loading_default.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/list_item_loading_repo.xml" value="0.3625" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/list_item_loading_user.xml" value="0.33" />
         <entry key="..\:/Users/hhiza/Documents/AndroidStudio/GithubUser/app/src/main/res/layout/list_item_need_input_default.xml" value="0.20260416666666667" />
       </map>

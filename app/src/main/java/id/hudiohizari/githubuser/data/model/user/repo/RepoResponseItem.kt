@@ -1,6 +1,7 @@
 package id.hudiohizari.githubuser.data.model.user.repo
 
 import com.google.gson.annotations.SerializedName
+import id.hudiohizari.githubuser.util.NumberUtil
 
 data class RepoResponseItem(
     @SerializedName("allow_forking")
@@ -94,7 +95,7 @@ data class RepoResponseItem(
     @SerializedName("milestones_url")
     val milestonesUrl: String?,
     @SerializedName("mirror_url")
-    val mirrorUrl: String?,
+    val mirrorUrl: Any?,
     val name: String?,
     @SerializedName("node_id")
     val nodeId: String?,
@@ -132,7 +133,7 @@ data class RepoResponseItem(
     val tagsUrl: String?,
     @SerializedName("teams_url")
     val teamsUrl: String?,
-    val topics: MutableList<String>?,
+    val topics: MutableList<Any>?,
     @SerializedName("trees_url")
     val treesUrl: String?,
     @SerializedName("updated_at")
@@ -142,4 +143,10 @@ data class RepoResponseItem(
     val watchers: Int?,
     @SerializedName("watchers_count")
     val watchersCount: Int?
-)
+) {
+
+    fun getFormattedStargazersCount(): String? {
+        return NumberUtil.prettyCount(stargazersCount)
+    }
+
+}

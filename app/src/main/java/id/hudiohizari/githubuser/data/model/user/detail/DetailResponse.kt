@@ -1,9 +1,12 @@
 package id.hudiohizari.githubuser.data.model.user.detail
 
+import android.content.Context
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import id.hudiohizari.githubuser.R
+import id.hudiohizari.githubuser.util.NumberUtil
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -62,4 +65,20 @@ data class DetailResponse(
     @SerializedName("updated_at")
     val updatedAt: String?,
     val url: String?
-): Parcelable
+): Parcelable {
+
+    fun getFormattedUsername(context: Context): String {
+        return context.getString(
+            R.string.usernameFormat, login ?: context.getString(R.string.empty)
+        )
+    }
+
+    fun getFormattedFollowers(): String? {
+        return NumberUtil.prettyCount(followers)
+    }
+
+    fun getFormattedFollowing(): String? {
+        return NumberUtil.prettyCount(following)
+    }
+
+}
