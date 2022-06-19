@@ -66,12 +66,12 @@ class UserDetailFragment : Fragment(), UserDetailViewModel.Listener {
 
     private fun initObserver() {
         viewModel.apply {
-            userDetail.observe(viewLifecycleOwner, {
+            userDetail.observe(viewLifecycleOwner) {
                 it?.let { loadUserRepo() }
-            })
-            response.observe(viewLifecycleOwner, {
+            }
+            response.observe(viewLifecycleOwner) {
                 it?.let { processRepoListData(it) }
-            })
+            }
         }
     }
 

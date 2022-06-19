@@ -14,12 +14,12 @@ fun <T> LiveData<T>.observeDebounce(
     delay: Long = 500
 ) {
     var value: T
-    observe(owner, { t ->
+    observe(owner) { t ->
         value = t
         CoroutineScope(Dispatchers.Main).launch {
             delay(delay)
             if (value != t) return@launch
             observer.onChanged(t)
         }
-    })
+    }
 }

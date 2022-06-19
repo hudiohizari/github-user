@@ -95,9 +95,9 @@ class UserSearchFragment : Fragment(), UserSearchViewModel.Listener {
                     lastSearch = it
                 }
             })
-            response.observe(viewLifecycleOwner, {
+            response.observe(viewLifecycleOwner) {
                 it?.let { processUserListData(it) }
-            })
+            }
         }
     }
 
