@@ -1,4 +1,4 @@
-#Github User Finder
+## Github User Finder
 
 A simple app with:
 - MVVM
